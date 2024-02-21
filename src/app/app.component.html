@@ -67,15 +67,14 @@
             <ul class="products-list">
 
                 <li class="product-item" *ngFor="let product of productsData">
-                    <img src="../assets/images/burgers/{{product.image}}" alt="Бургер №{{product.id}}"
-                        class="product-item-image">
+                    <img src="{{product.image}}" alt="Бургер" class="product-item-image">
                     <h3 class="product-item-title">{{product.title}}</h3>
                     <p class="product-item-text">{{product.text}}</p>
                     <div class="produt-item-extra">
                         <div class="product-item-info">
                             <div class="product-item-price">{{product.price}}
                                 {{currentCurrency}}</div>
-                            <div class="product-item-weight">{{product.weight}} гр</div>
+                            <div class="product-item-weight">{{product.grams}} гр</div>
                         </div>
                         <button class="button product-button" (click)="scrollTo(sectionOrder, product)">
                             <span>Заказать</span>

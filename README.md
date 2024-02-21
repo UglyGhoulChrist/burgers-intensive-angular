@@ -7,6 +7,8 @@
 - cd burgers-intensive-angular
 - code .
 
+- ng generate service App // Создание файла service
+
 ## Starting development
 
 - yarn start

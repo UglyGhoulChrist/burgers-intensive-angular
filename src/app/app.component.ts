@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import burgersList from 'data/burgersList'
-import { IBurgerData, TCurrency } from 'interfaces/interfaces';
+import { IBurgerData, IBurgerDataBackend, TCurrency } from 'interfaces/interfaces';
+import { AppService } from './app.service';
 
 @Component({
     selector: 'app-root',
@@ -10,18 +11,25 @@ import { IBurgerData, TCurrency } from 'interfaces/interfaces';
 })
 
 export class AppComponent {
-
+    // Валидация формы
     form = this.fb.group({
         order: ['', Validators.required],
         name: ['', Validators.required],
         phone: ['', Validators.required],
     })
 
-    productsData: IBurgerData[] = structuredClone(burgersList)
+    productsData: any
+    // productsData: IBurgerData[] = structuredClone(burgersList)
 
     currentCurrency = '$'
 
-    constructor(private fb: FormBuilder) { }
+    constructor(private fb: FormBuilder, private appService: AppService) { }
+
+    ngOnInit() {
+        this.appService.getData().subscribe(data => {
+            this.productsData = data
+        })
+    }
 
     scrollTo(target: HTMLElement, burger?: any): void {
         target.scrollIntoView({ behavior: 'smooth' })
@@ -33,7 +41,21 @@ export class AppComponent {
     confirmOrder() {
 
         if (this.form.valid) {
-            alert('Спасибо за заказ! Скоро мы свяжемся с Вами по телефону.')
+
+            console.log(this.form.value);
+
+            this.appService.sendOrder(this.form.value).subscribe(
+                {
+                    next: (responce: any) => {
+                        alert(responce.message)
+                        console.log(responce.message);
+
+                    },
+                    error: (responce: any) => {
+                        alert(responce.error.message)
+                    },
+                }
+            )
             this.form.reset()
         }
     }
@@ -73,6 +95,6 @@ export class AppComponent {
         }
         this.currentCurrency = newCurrency
 
-        this.productsData.forEach((product) => product.price = product.basePrice * coefficient)
+        this.productsData.forEach((product: { price: number; basePrice: number; }) => product.price = product.basePrice * coefficient)
     }
 }

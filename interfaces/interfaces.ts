@@ -1,14 +1,21 @@
 type TCurrency = '$' | '₽' | 'BIN' | '€' | '¥'
 
 interface IBurgerData {
-    id: number,
     image: string,
     title: string,
     text: string,
     price: number,
     basePrice: number,
-    currency: TCurrency,
-    weight: number,
+    grams: number,
 }
 
-export type { TCurrency, IBurgerData }
+interface IBurgerDataBackend {
+    image: string,
+    title: string,
+    text: string,
+    price: number,
+    basePrice: number,
+    grams: number,
+}
+
+export type { TCurrency, IBurgerData, IBurgerDataBackend }

@@ -1,6 +1,7 @@
 import { IBurgerData } from "interfaces/interfaces";
 
-const burgersList: IBurgerData[] = [
+const burgersList = [
+    // const burgersList: IBurgerData[] = [
     {
         id: 1,
         image: '1.webp',
