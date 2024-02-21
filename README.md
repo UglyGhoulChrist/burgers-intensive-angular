@@ -1,5 +1,16 @@
 # BurgersIntensiveAngular
 
+## Creating and opening a project
+
+- npm install -g @angular/cli@16
+- ng new burgers-intensive-angular
+- cd burgers-intensive-angular
+- code .
+
+## Starting development
+
+- yarn start
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.12.
 
 ## Development server
